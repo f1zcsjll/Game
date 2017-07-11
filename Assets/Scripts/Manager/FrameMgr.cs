@@ -2,15 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Logic.Game;
 
 namespace Manager
 {
     public class FrameMgr
     {
         private static FrameMgr _instance;
+        private GameObject FrameRoot;
         private FrameMgr()
         {
-
+            FrameRoot = new GameObject("FrameRoot");
+            FrameRoot.AddComponent<FrameRun>();
+            UnityEngine.Object.DontDestroyOnLoad(FrameRoot);
         }
         /// <summary>
         /// 全局帧管理器
