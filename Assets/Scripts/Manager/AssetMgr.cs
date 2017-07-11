@@ -17,7 +17,7 @@ namespace Manager
         {
             if (AssetPool == null)
                 AssetPool = new Dictionary<string, UnityEngine.Object>();
-            CleanAssetPool();
+            CleanAllAssetPool();
         }
         /// <summary>
         /// 资源加载管理器
@@ -108,9 +108,21 @@ namespace Manager
         }
 
         /// <summary>
-        /// 清理资源池
+        /// 清除单个资源
         /// </summary>
-        public void CleanAssetPool()
+        /// <param name="path"></param>
+        public void CleanAssetPool(string path)
+        {
+            if(AssetPool.ContainsKey(path))
+            {
+                AssetPool.Remove(path);
+            }
+        }
+
+        /// <summary>
+        /// 清理所有资源
+        /// </summary>
+        public void CleanAllAssetPool()
         {
             if(AssetPool!=null)
                 AssetPool.Clear();
