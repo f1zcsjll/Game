@@ -10,7 +10,7 @@ namespace Tools
         private float DelayTime = 0;
         private float Interval = 0;
         private int Times = 0;
-        private MVC.Notifier.StandardDelegate Action;
+        private MVC.Notifier.StandardDelegate Action=null;
 
         /// <summary>
         /// 初始化定时器
@@ -19,7 +19,7 @@ namespace Tools
         /// <param name="interval">重复间隔时间，为0不重复</param>
         /// <param name="times">重复执行次数，为0无限执行</param>
         /// <param name="action">执行函数</param>
-        public Timer(MVC.Notifier.StandardDelegate action, float delaytime=0, float interval = 0, int times = 0)
+        public void Init(MVC.Notifier.StandardDelegate action, float delaytime=0, float interval = 0, int times = 0)
         {
             DelayTime = delaytime;
             Interval = interval;
@@ -27,11 +27,11 @@ namespace Tools
             Action = action;
             if(Interval==0)
             {
-                Invoke(Action.Method.Name, DelayTime);
+                StartCoroutine(Do(DelayTime));
             }
             else if(Times==0)
             {
-                InvokeRepeating(Action.Method.Name, DelayTime, Interval);
+                Invoke("TimesAction", DelayTime);
             }
             else
             {
@@ -41,9 +41,18 @@ namespace Tools
 
         void TimesAction()
         {
-            for(int i=Times-1;i>=0;i--)
+            if(Times==0)
             {
-                StartCoroutine(Do(i * Interval));
+                StartCoroutine(DoRepeat(Interval));
+                CancelInvoke("TimesAction");
+            }
+            else
+            {
+                for(int i=Times-1;i>=0;i--)
+                {
+                    StartCoroutine(Do(i * Interval));
+                }
+                CancelInvoke("TimesAction");
             }
         }
 
@@ -51,7 +60,15 @@ namespace Tools
         {
             yield return new WaitForSeconds(waittime);
             Action();
-            CancelInvoke("TimesAction");
+        }
+
+        IEnumerator DoRepeat(float waittime)
+        {
+            while(true)
+            {
+                yield return new WaitForSeconds(waittime);
+                Action();
+            }
         }
 
         /// <summary>
@@ -59,9 +76,9 @@ namespace Tools
         /// </summary>
         public void StopTimer()
         {
-            CancelInvoke(Action.Method.Name);
             CancelInvoke("TimesAction");
             StopAllCoroutines();
+            Destroy(gameObject);
         }
     }
 }

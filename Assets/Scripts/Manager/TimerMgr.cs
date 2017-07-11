@@ -9,7 +9,13 @@ namespace Manager
     public class TimerMgr
     {
         private static TimerMgr _instance;
-        private Dictionary<int, Timer> TimerList = new Dictionary<int, Timer>();
+        private Dictionary<string, Timer> TimerList = new Dictionary<string, Timer>();
+        private GameObject TimerRoot;
+        private TimerMgr()
+        {
+            TimerRoot = new GameObject("TimerRoot");
+            UnityEngine.Object.DontDestroyOnLoad(TimerRoot);
+        }
         public static TimerMgr GetInstance()
         {
             if (_instance == null)
@@ -24,18 +30,21 @@ namespace Manager
         /// <param name="interval">重复间隔时间，为0不重复</param>
         /// <param name="times">重复执行次数，为0无限执行</param>
         /// <param name="action">执行函数</param>
-        public int AddTimer(MVC.Notifier.StandardDelegate action, float delaytime=0, float interval = 0, int times = 0)
+        public string AddTimer(MVC.Notifier.StandardDelegate action, float delaytime=0, float interval = 0, int times = 0)
         {
-            Timer newtimer = new Timer(action, delaytime, interval, times);
+            string key = Guid.NewGuid().ToString();
+            GameObject timer = new GameObject("Timer" + key);
+            timer.transform.parent = TimerRoot.transform;
+            Timer newtimer = timer.AddComponent<Timer>();
+            newtimer.Init(action, delaytime, interval, times);
             if(newtimer!=null)
             {
-                int key=newtimer.GetHashCode();
                 TimerList.Add(key, newtimer);
                 return key;
             }
             else
             {
-                return -1;
+                return "";
             }
         }
 
@@ -43,7 +52,7 @@ namespace Manager
         /// 删除定时器
         /// </summary>
         /// <param name="key"></param>
-        public void RemoveTimer(int key)
+        public void RemoveTimer(string key)
         {
             if(TimerList.ContainsKey(key))
             {
