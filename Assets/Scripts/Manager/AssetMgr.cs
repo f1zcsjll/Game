@@ -56,26 +56,23 @@ namespace Manager
             if(isAsync)
             {
                 ResourceRequest req = Resources.LoadAsync(Path);
-                if(req.isDone)
+                Obj = req.asset;
+                if (Obj != null)
                 {
-                    Obj = req.asset;
-                    if (Obj != null)
+                    if (isPool)
                     {
-                        if (isPool)
-                        {
-                            AssetPool.Add(Path, Obj);
-                        }
-                        if (fallback != null)
-                        {
-                            fallback();
-                        }
-                        return;
+                        AssetPool.Add(Path, Obj);
                     }
-                    else
+                    if (fallback != null)
                     {
-                        Debug.LogError("LoadAsset Failed");
-                        return;
+                        fallback();
                     }
+                    return;
+                }
+                else
+                {
+                    Debug.LogError("LoadAsset Failed");
+                    return;
                 }
             }
             else
