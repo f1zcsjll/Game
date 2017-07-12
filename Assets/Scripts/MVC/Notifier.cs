@@ -10,7 +10,7 @@ namespace MVC
         private Dictionary<string, StandardDelegate> EventMap = new Dictionary<string, StandardDelegate>();
 
         /// <summary>
-        /// 注册时间
+        /// 注册事件
         /// </summary>
         /// <param name="name"></param>
         /// <param name="Del"></param>
