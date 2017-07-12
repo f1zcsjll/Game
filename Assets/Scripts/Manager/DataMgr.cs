@@ -8,11 +8,7 @@ using UnityEngine;
 namespace Manager
 {
     public class DataMgr
-    {
-        /// <summary>
-        /// 读写文件路径
-        /// </summary>
-        public static string DataPath = Application.persistentDataPath;
+    {       
         private static DataMgr _instance;
 
         /// <summary>

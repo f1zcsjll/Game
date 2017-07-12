@@ -25,9 +25,16 @@ namespace Manager
             return _instance;
         }
 
+        /// <summary>
+        /// 创建声音
+        /// </summary>
+        /// <param name="type">声音类型</param>
+        /// <param name="isplay">是否立即播放</param>
+        /// <param name="isloop">是否循环播放</param>
+        /// <param name="volume">音量</param>
         public void CreateSound(SoundType type,bool isplay=false,bool isloop=false,float volume=1.0f)
         {
-            if(!SoundList.ContainsKey(type))
+            if (!HasCreate(type))
             {
                 GameObject temp = new GameObject(type.ToString());
                 temp.transform.parent=SoundRoot.transform;
@@ -43,11 +50,22 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// 声音是否已创建
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public bool HasCreate(SoundType type)
         {
             return SoundList.ContainsKey(type);
         }
 
+        /// <summary>
+        /// 播放声音
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="isloop"></param>
+        /// <param name="delaytime">延迟播放时间</param>
         public void PlaySound(SoundType type,bool isloop=false,ulong delaytime=0)
         {
             if(SoundList.ContainsKey(type))
@@ -57,21 +75,40 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// 是否正在播放
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public bool IsPlaying(SoundType type)
         {
             return SoundList[type].isPlaying;
         }
 
+        /// <summary>
+        /// 设定音量
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="volume"></param>
         public void SetVolume(SoundType type,float volume)
         {
             SoundList[type].volume = Volume * volume;
         }
 
+        /// <summary>
+        /// 设定循环
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="isloop"></param>
         public void SetLoop(SoundType type,bool isloop)
         {
             SoundList[type].loop = isloop;
         }
 
+        /// <summary>
+        /// 停止播放
+        /// </summary>
+        /// <param name="type"></param>
         public void StopSound(SoundType type)
         {
             if(SoundList.ContainsKey(type))
@@ -80,6 +117,9 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// 停止所有声音播放
+        /// </summary>
         public void StopAllSound()
         {
             var e = SoundList.GetEnumerator();
@@ -89,6 +129,10 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// 删除声音物体
+        /// </summary>
+        /// <param name="type"></param>
         public void DeleteSound(SoundType type)
         {
             if(SoundList.ContainsKey(type))
@@ -100,6 +144,9 @@ namespace Manager
             }
         }
 
+        /// <summary>
+        /// 清除所有声音
+        /// </summary>
         public void DeleteAllSound()
         {
             var e = SoundList.GetEnumerator();
