@@ -33,12 +33,18 @@ namespace UI
 
         void ShowProgress()
         {
-            Progress.value = LoadSenceMgr.GetInstance().GetLoadProgress();
+            Progress.value = LoadSceneMgr.GetInstance().GetLoadProgress();
+        }
+
+        protected override void OnClickCloseButton()
+        {
+            base.OnClickCloseButton();
         }
 
         protected override void OnDestroy()
         {
             FrameMgr.GetInstance().UnRegisterUpdate(ShowProgress);
+            OnClickCloseButton();
             base.OnDestroy();
         }
     }

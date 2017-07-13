@@ -14,6 +14,7 @@ namespace Manager
         private GameObject EventSystem;
         private GameObject UIRoot;
         private Dictionary<UIType, BaseWindow> WinList = new Dictionary<UIType, BaseWindow>();
+        private UIType UpUI;
         private UIMgr()
         {            
             UIRoot = new GameObject("UIRoot", typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
@@ -34,7 +35,31 @@ namespace Manager
 
         public void ShowWin(UIType type)
         {
-
+            if (!HasWinOpen(type))
+            {
+                AssetMgr.GetInstance().LoadAsset(PathMgr.GetInstance().GetPath(type), true, true, () =>
+                {
+                    var win=GameObject.Instantiate(AssetMgr.GetInstance().GetAsset(), UIRoot.transform);
+                    WinList.Add(type, ((GameObject)win).GetComponent<BaseWindow>());
+                    UpUI = type;
+                });
+            }
         }
+
+        public void CloseWin(UIType type)
+        {
+            if (HasWinOpen(type))
+            {
+                GameObject.Destroy(WinList[type].gameObject);
+                WinList.Remove(type);
+            }
+        }
+
+        public bool HasWinOpen(UIType type)
+        {
+            return WinList.ContainsKey(type);
+        }
+
+
     }
 }

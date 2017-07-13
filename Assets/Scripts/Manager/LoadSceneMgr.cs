@@ -5,19 +5,19 @@ using UnityEngine.SceneManagement;
 
 namespace Manager
 {
-    public class LoadSenceMgr
+    public class LoadSceneMgr
     {
-        private static LoadSenceMgr _instance;
+        private static LoadSceneMgr _instance;
         private static AsyncOperation ao;
  
         /// <summary>
         /// 场景加载管理器
         /// </summary>
         /// <returns></returns>
-        public static LoadSenceMgr GetInstance()
+        public static LoadSceneMgr GetInstance()
         {
             if (_instance == null)
-                _instance = new LoadSenceMgr();
+                _instance = new LoadSceneMgr();
             return _instance;
         }
 

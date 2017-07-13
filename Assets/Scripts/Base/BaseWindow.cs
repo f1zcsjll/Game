@@ -24,7 +24,7 @@ namespace Base
 
         protected virtual void OnClickCloseButton()
         {
-
+            UIMgr.GetInstance().CloseWin(GetUIType());
         }
 
         protected abstract UIType GetUIType();
