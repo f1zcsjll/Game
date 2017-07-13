@@ -44,6 +44,10 @@ namespace Manager
                     UpUI = type;
                 });
             }
+            else
+            {
+                WinList[type].gameObject.SetActive(true);
+            }
         }
 
         public void CloseWin(UIType type)
@@ -60,6 +64,42 @@ namespace Manager
             return WinList.ContainsKey(type);
         }
 
+        public void HideWin(UIType type)
+        {
+            if(HasWinOpen(type))
+            {
+                WinList[type].gameObject.SetActive(false);
+            }
+        }
 
+        public void HideAllWin()
+        {
+            UIRoot.SetActive(false);
+        }
+
+        public void CloseAllWin()
+        {
+            List<UIType> closelist = new List<UIType>(WinList.Keys);
+            var e = closelist.GetEnumerator();
+            while (e.MoveNext())
+            {
+                CloseWin(e.Current);
+            }
+            e.Dispose();
+            closelist.Clear();
+        }
+
+        public void CloseWinByFilter(List<UIType> filter)
+        {
+            List<UIType> closelist = new List<UIType>(WinList.Keys);
+            var e = closelist.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if(!filter.Contains(e.Current))
+                    CloseWin(e.Current);
+            }
+            e.Dispose();
+            closelist.Clear();
+        }
     }
 }
