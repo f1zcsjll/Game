@@ -36,7 +36,7 @@ public static class Localization
         if(DicLocalization.ContainsKey(key))
         {
             if (!string.IsNullOrEmpty(DicLocalization[key][LanguageType]))
-                return DicLocalization[key][LanguageType];
+                return DicLocalization[key][LanguageType].Replace("\\n","\n");
             else
                 return key;
         }
