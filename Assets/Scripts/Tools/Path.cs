@@ -91,7 +91,7 @@ namespace Tools
 
         static void DataPathInit()
         {
-
+            DataPathList.Add(DataType.Localization, Data+"localization");
         }
 
         static void MaterialPathInit()
