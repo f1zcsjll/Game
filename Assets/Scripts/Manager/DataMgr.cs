@@ -21,16 +21,6 @@ namespace Manager
                 _instance = new DataMgr();
             return _instance;
         }
-
-
-        /// <summary>
-        /// 读取Localization
-        /// </summary>
-        /// <param name="LanguageList"></param>
-        /// <param name="DicLocalization"></param>
-        public static void ReadLocalization(string[] LanguageList,Dictionary<string, string[]> DicLocalization)
-        {
-
-        }
+       
     }
 }

@@ -25,12 +25,20 @@ public static class Localization
         }
     }
 
+    /// <summary>
+    /// 根据Key获取文本
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static string Get(string key)
     {
         Init();
         if(DicLocalization.ContainsKey(key))
         {
-            return DicLocalization[key][LanguageType];
+            if (!string.IsNullOrEmpty(DicLocalization[key][LanguageType]))
+                return DicLocalization[key][LanguageType];
+            else
+                return key;
         }
         else
         {
@@ -38,6 +46,10 @@ public static class Localization
         }
     }
 
+    /// <summary>
+    /// 设定当前语言种类
+    /// </summary>
+    /// <param name="language"></param>
     public static void SetLanguage(string language)
     {
         Init();
