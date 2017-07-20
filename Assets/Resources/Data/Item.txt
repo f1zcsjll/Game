@@ -1,0 +1,3 @@
+ID,Name,Type,AddHp,AddMp
+1,血瓶,1,100,0
+2,蓝瓶,1,0,100

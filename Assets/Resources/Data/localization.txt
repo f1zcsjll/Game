@@ -1,1 +1,2 @@
-Key,Chinese
+﻿Key,Chinese,English
+test,[i][cff0000]测\n试[c-][i-],test

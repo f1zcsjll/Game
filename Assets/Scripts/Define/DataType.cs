@@ -6,5 +6,9 @@
         /// 文本信息
         /// </summary>
         Localization,
+        /// <summary>
+        /// 道具信息
+        /// </summary>
+        Item,
     }
 }

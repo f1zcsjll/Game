@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Define;
 
 namespace Manager
 {
@@ -37,9 +38,9 @@ namespace Manager
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public object GetPrefsData(string name,string defaultvalue="")
+        public object GetPrefsData(string name,object defaultvalue=null)
         {
-            return PlayerPrefs.GetString(name,defaultvalue);
+            return PlayerPrefs.GetString(name,defaultvalue.ToString());
         }
 
         public void SaveAllPrefsData()
@@ -62,6 +63,60 @@ namespace Manager
         public void CleanAllPrefsData()
         {
             PlayerPrefs.DeleteAll();
+        }
+
+        /// <summary>
+        /// 读取配置信息
+        /// </summary>
+        /// <typeparam name="N">主键类型</typeparam>
+        /// <typeparam name="T">配置表数据</typeparam>
+        /// <param name="type">配置类型</param>
+        /// <returns></returns>
+        public Dictionary<N,T> GetConfigItems<N,T>(DataType type) where T:Base.BaseData,new()
+        {
+            Dictionary<N, T> list = new Dictionary<N, T>();
+            string[] data=new string[0];
+            AssetMgr.GetInstance().LoadAsset(PathMgr.GetInstance().GetPath(type), false, false, () =>
+            {
+                if (AssetMgr.GetInstance().GetAsset() == null)
+                    return;
+                data = AssetMgr.GetInstance().GetAsset().ToString().Split('\n');
+                for (int i = 0; i < data.Length; i++)
+                {
+                    data[i] = data[i].Replace("\r", "");
+                }
+            });
+            if (data.Length==0)
+                return null;
+            else if (data.Length == 1)
+                return list;
+            else
+            {                
+                for (int i = 1; i < data.Length; i++)
+                {
+                    if(data[i].StartsWith("#"))
+                    {
+                        continue;
+                    }
+                    T temp=new T();
+                    temp.ReadData(data[i]);
+                    object key = null;
+                    if(typeof(N)==typeof(int))
+                    {
+                        key = int.Parse(data[i].Split(',')[0]);
+                    }
+                    else if (typeof(N) == typeof(long))
+                    {
+                        key = long.Parse(data[i].Split(',')[0]);
+                    }
+                    else
+                    {
+                        key = data[i].Split(',')[0];
+                    }
+                    list.Add((N)key, temp);
+                }
+                return list;
+            }
         }
     }
 }
