@@ -10,9 +10,12 @@ namespace Manager
         private static ConfigMgr _instance;
 
         public ItemConfig ItemConfig = new ItemConfig();
+        public JobConfig JobConfig = new JobConfig();
+
         private ConfigMgr()
         {
             ItemConfig.InitConfig();
+            JobConfig.InitConfig();
         }
         public static ConfigMgr GetInstance()
         {
@@ -23,6 +26,7 @@ namespace Manager
         public void CleanAllConfig()
         {
             ItemConfig.UnInitConfig();
+            JobConfig.InitConfig();
         }
     }
 }

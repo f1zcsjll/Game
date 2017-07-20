@@ -5,21 +5,22 @@ using Base;
 
 namespace Config.Data
 {
-    public class CItem :BaseData
+    public class CJob :BaseData
     {
         public enum Type
         {
             ID,
             Name,
             Type,
-            AddHp,
-            AddMp,
+            Hp,
+            Mp,
 
-        };
+        }
+
         public override BaseData ReadData(string data)
         {
             string[] temp = data.Split(',');
-            for (int i = 0; i < temp.Length;i++)
+            for (int i = 0; i < temp.Length; i++)
             {
                 DataList.Add((Type)i, temp[i]);
             }

@@ -9,7 +9,6 @@ namespace Base
     {
         protected Dictionary<Enum, object> DataList = new Dictionary<Enum, object>();
         public abstract BaseData ReadData(string data);
-        protected abstract Define.DataType GetDataType();
         public object GetData(Enum type)
         {
             if (DataList.ContainsKey(type))

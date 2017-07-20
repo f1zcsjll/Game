@@ -10,5 +10,9 @@
         /// 道具信息
         /// </summary>
         Item,
+        /// <summary>
+        /// 职业信息
+        /// </summary>
+        Job,
     }
 }

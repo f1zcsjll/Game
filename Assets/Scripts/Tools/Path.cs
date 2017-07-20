@@ -93,6 +93,7 @@ namespace Tools
         {
             DataPathList.Add(DataType.Localization, Data+"localization");
             DataPathList.Add(DataType.Item, Data + "Item");
+            DataPathList.Add(DataType.Job, Data + "Job");
         }
 
         static void MaterialPathInit()
