@@ -63,10 +63,7 @@ namespace Manager
                     return result = (T)(object)PlayerPrefs.GetString(name);
                 }
             }
-            else
-            {
-                Debug.LogError("GetPrefsData Error!");                
-            }
+            Debug.LogError("GetPrefsData Error!");                
             return default(T);
         }
 
