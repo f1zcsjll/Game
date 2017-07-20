@@ -28,13 +28,13 @@ namespace Manager
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void SavePrefsData(string name,Type type,object data)
+        public void SavePrefsData<T>(string name,object data)
         {
-            if (type == typeof(int))
+            if (typeof(T) == typeof(int))
                 PlayerPrefs.SetInt(name, int.Parse(data.ToString()));
-            else if (type == typeof(float))
+            else if (typeof(T) == typeof(float))
                 PlayerPrefs.SetFloat(name, float.Parse(data.ToString()));
-            else if (type == typeof(string))
+            else if (typeof(T) == typeof(string))
                 PlayerPrefs.SetString(name, (string)data);
             else
                 Debug.LogError("SavePrefsData Error!");
