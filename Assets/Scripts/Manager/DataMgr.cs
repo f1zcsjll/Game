@@ -28,9 +28,16 @@ namespace Manager
         /// </summary>
         /// <param name="name"></param>
         /// <param name="data"></param>
-        public void SavePrefsData(string name,object data)
+        public void SavePrefsData(string name,Type type,object data)
         {
-            PlayerPrefs.SetString(name,(string)data.ToString());
+            if (type == typeof(int))
+                PlayerPrefs.SetInt(name, int.Parse(data.ToString()));
+            else if (type == typeof(float))
+                PlayerPrefs.SetFloat(name, float.Parse(data.ToString()));
+            else if (type == typeof(string))
+                PlayerPrefs.SetString(name, (string)data);
+            else
+                Debug.LogError("SavePrefsData Error!");
         }
 
         /// <summary>
@@ -38,9 +45,29 @@ namespace Manager
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public object GetPrefsData(string name,object defaultvalue=null)
+        public T GetPrefsData<T>(string name)
         {
-            return PlayerPrefs.GetString(name,defaultvalue.ToString());
+            T result;
+            if (PlayerPrefs.HasKey(name))
+            {
+                if (typeof(T) == typeof(int))
+                {
+                    return result = (T)(object)PlayerPrefs.GetInt(name);
+                }
+                else if (typeof(T) == typeof(float))
+                {
+                    return result = (T)(object)PlayerPrefs.GetFloat(name);
+                }
+                else if (typeof(T) == typeof(string))
+                {
+                    return result = (T)(object)PlayerPrefs.GetString(name);
+                }
+            }
+            else
+            {
+                Debug.LogError("GetPrefsData Error!");                
+            }
+            return default(T);
         }
 
         public void SaveAllPrefsData()
