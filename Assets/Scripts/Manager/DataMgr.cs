@@ -118,7 +118,7 @@ namespace Manager
             {                
                 for (int i = 1; i < data.Length; i++)
                 {
-                    if(data[i].StartsWith("#"))
+                    if(string.IsNullOrEmpty(data[i])||data[i].StartsWith("#"))
                     {
                         continue;
                     }

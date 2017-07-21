@@ -23,7 +23,7 @@ namespace Manager
 
         public static void LoadSence(string name)
         {
-            SceneManager.LoadScene("WinLoading");
+            SceneManager.LoadScene("Scenes/WinLoading");
             ao = null;
             LoadSenceAsync(name);
         }
