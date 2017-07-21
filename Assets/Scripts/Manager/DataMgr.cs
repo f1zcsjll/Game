@@ -142,5 +142,44 @@ namespace Manager
                 return list;
             }
         }
+
+        /// <summary>
+        /// 保存系统数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="Data"></param>
+        public void SaveSystemData(string name,Dictionary<string,string> Data)
+        {
+            string SavePath = Tools.Path.SaveDataPath + name + ".txt";
+            Dictionary<string, string> SaveData = new Dictionary<string, string>();
+            StreamReader sr = new StreamReader(SavePath, Encoding.UTF8);
+            string line="";
+            while((line=sr.ReadLine())!=null)
+            {
+                SaveData.Add(line.Split('=')[0], line.Split('=')[1]);
+            }
+            sr.Close();
+            var e = Data.GetEnumerator();
+            while(e.MoveNext())
+            {
+                if(SaveData.ContainsKey(e.Current.Key))
+                {
+                    SaveData[e.Current.Key] = Data[e.Current.Key];
+                }
+                else
+                {
+                    SaveData.Add(e.Current.Key, e.Current.Value);
+                }
+            }
+            e.Dispose();
+            StreamWriter sw = new StreamWriter(SavePath, false, Encoding.UTF8);
+            var f = SaveData.GetEnumerator();
+            while(f.MoveNext())
+            {
+                line = f.Current.Key + "=" + f.Current.Value;
+                sw.WriteLine(line);
+            }
+            sw.Close();
+        }
     }
 }

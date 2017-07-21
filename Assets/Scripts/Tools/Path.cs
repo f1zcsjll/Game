@@ -11,7 +11,7 @@ namespace Tools
         /// </summary>
         public static string SaveDataPath
         {
-            get { return Application.persistentDataPath; }
+            get { return Application.persistentDataPath+"/"; }
         }
 
         //一级资源路径
