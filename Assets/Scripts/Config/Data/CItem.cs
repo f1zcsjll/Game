@@ -1,29 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Base;
+﻿using Base;
 
-namespace Config.Data
-{
-    public class CItem :BaseData
-    {
-        public enum Type
-        {
-            ID,
-            Name,
-            Type,
-            AddHp,
-            AddMp,
+namespace Config.Data {
+	public class CItem :BaseData {
+		public enum Type{
+			ID,
+			Name,
+			Type,
+			AddHp,
+			AddMp,
+		};
 
-        };
-        public override BaseData ReadData(string data)
-        {
-            string[] temp = data.Split(',');
-            for (int i = 0; i < temp.Length;i++)
-            {
-                DataList.Add((Type)i, temp[i]);
-            }
-            return this;
-        }
-    }
-}
+		public override BaseData ReadData(string data) {
+			string[] temp = data.Split(',');
+			for (int i = 0; i < temp.Length;i++) {
+				DataList.Add((Type)i, temp[i]); }
+			return this;
+}}}
