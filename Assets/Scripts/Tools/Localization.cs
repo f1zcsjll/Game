@@ -58,7 +58,7 @@ public static class Localization
                     DicLocalization[key][LanguageType] = DicLocalization[key][LanguageType].Replace("[c", "<Color=#");
                     DicLocalization[key][LanguageType] = DicLocalization[key][LanguageType].Replace("]", ">");
                 }
-                if (DicLocalization[key][LanguageType].Contains("[s-]"))
+                if (DicLocalization[key][LanguageType].Contains("[s-]") || DicLocalization[key][LanguageType].Contains("[s->"))
                 {
                     DicLocalization[key][LanguageType] = DicLocalization[key][LanguageType].Replace("[s-", "</size");
                     DicLocalization[key][LanguageType] = DicLocalization[key][LanguageType].Replace("[s", "<size=");
