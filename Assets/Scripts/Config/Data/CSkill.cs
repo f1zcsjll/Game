@@ -1,14 +1,12 @@
 ﻿using Base;
 
 namespace Config.Data {
-	public class CItem :BaseData {
+	public class CSkill :BaseData {
 		public enum Type{
 			ID,
 			Name,
 			JobID,
-			Type,
-			AddHp,
-			AddMp,
+			Damage,
 		};
 
 		public override BaseData ReadData(string data) {

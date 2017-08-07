@@ -14,5 +14,9 @@
         /// 职业信息
         /// </summary>
         Job,
+        /// <summary>
+        /// 技能信息
+        /// </summary>
+        Skill,
     }
 }
