@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Tools
+namespace Tools.Editor
 {
     public class AddLanguage : EditorWindow
     {
