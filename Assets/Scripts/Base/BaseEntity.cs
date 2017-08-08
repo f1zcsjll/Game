@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Define;
 
-namespace Logic.Entity
+namespace Base
 {
-    public abstract class Entity :MVC.Model
+    public abstract class BaseEntity
     {
         public long ID;
         public string Name;
