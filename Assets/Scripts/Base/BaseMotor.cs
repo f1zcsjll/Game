@@ -16,6 +16,14 @@ namespace Base
             agent.ResetPath();
         }
 
+        public abstract void InitEntity(long Id, string Name, Define.EntityType Type);
+
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <returns></returns>
+        public abstract BaseEntity GetEntity();
+
         /// <summary>
         /// 停止移动
         /// </summary>

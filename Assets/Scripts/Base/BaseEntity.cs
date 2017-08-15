@@ -7,11 +7,23 @@ namespace Base
 {
     public abstract class BaseEntity
     {
-        public long ID;
-        public string Name;
-        public abstract EntityType F_GetType();
-        Vector3 GridPosition = Vector3.zero;
-        float Direction = 0;
+        protected long id;
+        protected string name;
+        protected EntityType type;
+        protected Vector3 GridPosition = Vector3.zero;
+        protected float Direction = 0;
+
+        public virtual void Init(long Id, string Name, EntityType Type)
+        {
+            id = Id;
+            name = Name;
+            type = Type;
+        }
+
+        public long ID { get { return id; } }
+        public string Name { get { return name; } }
+        public EntityType Type { get { return type; } }
+        
         public Vector4 Position
         {
             get
@@ -24,6 +36,5 @@ namespace Base
                 GridPosition = new Vector3(value.x, value.y, value.z);
             }
         }
-        public abstract string F_GetPath();
     }
 }
