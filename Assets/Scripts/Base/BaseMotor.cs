@@ -11,9 +11,12 @@ namespace Base
 
         protected virtual void Init(NavMeshAgent Agent)
         {
-            agent = Agent;
-            agent.updateRotation = true;
-            agent.ResetPath();
+            if (Agent != null)
+            {
+                agent = Agent;
+                agent.updateRotation = true;
+                agent.ResetPath();
+            }
         }
 
         public abstract void InitEntity(long Id, string Name, Define.EntityType Type);
@@ -29,7 +32,10 @@ namespace Base
         /// </summary>
         public void StopMove()
         {
-            agent.ResetPath();
+            if (agent != null)
+            {
+                agent.ResetPath();
+            }
         }
 
         /// <summary>
@@ -39,8 +45,12 @@ namespace Base
         /// <returns></returns>
         public bool MoveDestination(GameObject target)
         {
-            StopMove();
-            return agent.SetDestination(target.transform.position);
+            if (agent != null)
+            {
+                StopMove();
+                return agent.SetDestination(target.transform.position);
+            }
+            return false;
         }
 
         /// <summary>
@@ -50,8 +60,12 @@ namespace Base
         /// <returns></returns>
         public bool MoveDestination(Vector3 target)
         {
-            StopMove();
-            return agent.SetDestination(target);
+            if (agent != null)
+            {
+                StopMove();
+                return agent.SetDestination(target);
+            }
+            return false;
         }
 
         /// <summary>
@@ -60,7 +74,10 @@ namespace Base
         /// <param name="offset"></param>
         public void OffsetPosition(Vector3 offset)
         {
-            agent.Move(offset);
+            if (agent != null)
+            {
+                agent.Move(offset);
+            }
         }
     }
 }

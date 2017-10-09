@@ -183,7 +183,7 @@ namespace Model
         }
 
         /// <summary>
-        /// 读取玩家案件设定
+        /// 读取玩家按键设定
         /// </summary>
         public void ReadKeyConfig()
         {

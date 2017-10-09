@@ -65,7 +65,7 @@ namespace Manager
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Base.BaseMotor GetMotor(long id)
+        public Base.BaseMotor GetEntity(long id)
         {
             if(EntityList.ContainsKey(id))
             {
@@ -74,6 +74,23 @@ namespace Manager
             else
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据ID删除场景中的实体
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteEntity(long id)
+        {
+            if(EntityList.ContainsKey(id))
+            {
+                GameObject.Destroy(EntityList[id].gameObject);
+                EntityList.Remove(id);
+            }
+            else
+            {
+                return;
             }
         }
     }
